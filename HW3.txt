@@ -1,0 +1,26 @@
+genRegrObs = function(m, a, b, xmin, xmax, sigma)
+{
+	xs = runif(m, xmin, xmax);
+	es = rnorm(m, 0, sigma);
+	ys = a + b * xs + es;
+	matrix(c(ys, xs), c(m, 2));
+}
+
+getEstimates = function(m, a, b, xmin, xmax, sigma)
+{
+	matr = genRegrObs(m, a, b, xmin, xmax, sigma);
+	coefficients(summary(lm(matr[,1]~matr[,2])))[, 1];
+}
+
+plotDifferences = function(inimatr)
+{
+	for (index in 1: length(inimatr[,1]))
+	{
+		matr = genRegrObs(inimatr[index, 1], inimatr[index, 2], inimatr[index, 3], inimatr[index, 4], inimatr[index, 5], inimatr[index, 6]);
+		linmod = lm(matr[,1]~matr[,2])
+		coef = coefficients(summary(linmod))[, 1];
+		plot(matr[,2], matr[,1], col="red");
+		abline(inimatr[index, 2], inimatr[index, 3], col="green");
+		abline(coef[1], coef[2], col="blue");
+	}
+}

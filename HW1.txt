@@ -1,0 +1,27 @@
+x <- c(1, 8, 2, 6, 3, 8, 5, 5, 5, 5)
+x
+sum(x) / 10
+sapply(x, log10)
+log10(x)
+sapply(x, function(a) (a - 4.4) / 2.875)
+(x - 4.4) / 2.875
+max(x)-min(x)
+
+bill <- c(46, 33, 39, 37, 46, 30, 48, 32, 49, 35, 30, 48)
+bill
+sum(bill)
+min(bill)
+max(bill)
+length(bill[bill > 40])
+paste(length(bill[bill > 40]) * 100 / length(bill), "%", sep="")
+
+v <- scan()
+max(v)
+min(v)
+mean(v)
+sd(v)
+w <- sort(v)
+w
+sapply(v, function(a) (a - mean(v)) / sd(v))
+(v - mean(v)) / sd(v)
+

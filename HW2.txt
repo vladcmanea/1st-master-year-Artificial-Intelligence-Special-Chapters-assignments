@@ -1,0 +1,41 @@
+plotexp = function(a, b, precision = 0.1, color = "red", thickness = 2, ftype = "l", title = "f(x)=2^x, x in [a,b]", func = function(x) 2^x)
+{
+  xaxis = seq(a, b, precision);
+  yaxis = sapply(xaxis, func);
+  # png(paste("D:\\vlad.manea\\plotexp0.png"));
+  plot(xaxis, yaxis, col = color, lwd = thickness, type = ftype, main = title);
+  # dev.off()
+}
+plotexp(0, 7)
+
+plotbindists = function()
+{
+  for (index in 1: 9)
+  {
+    png(paste("D:\\vlad.manea\\binomial", index, ".png", sep=""));
+    plot(0: 20, dbinom(0: 20, 20, index / 10), main = paste("B(20, ", index / 10, ")", sep = ""), type="l", xlab = "xs", ylab = "frequencies");
+    dev.off()
+  }
+}
+plotbindists()
+
+CLT = function(n)
+{
+  counted = 10000;
+  ans = rep(0, counted);
+  for (index in 1: counted)
+  {
+    ans[index] = mean(rexp(n))
+  }
+  ans
+}
+printhist = function(sizes)
+{
+  for (index in 1: length(sizes))
+  {
+    png(paste("D:\\vlad.manea\\hexpo", sizes[index], ".png", sep=""));
+    hist(CLT(sizes[index]), main=paste("Histogram for n = ", sizes[index]), xlab="intervals", ylab="frequencies")
+    dev.off()
+  }
+}
+printhist(c(1, 5, 10, 100));
